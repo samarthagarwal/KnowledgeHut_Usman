@@ -25,71 +25,45 @@
 </ion-header>
 
 <ion-content>
-  <ion-button color="danger">
-    <ion-icon name="mail" slot="start"></ion-icon>
-    Send Email
-  </ion-button>
+  
+  <ion-list>
+    
+    <ion-list-header>
+      <ion-label>Game of Thrones</ion-label>
+    </ion-list-header>
+   
+    <ion-item-divider>
+      <ion-label>Lead characters</ion-label>
+    </ion-item-divider>
+   
+    <ion-item>
 
-  <ion-button color="warning">  
-    Send Email
-    <ion-icon name="mail" slot="end"></ion-icon>
-  </ion-button>
+      <ion-avatar slot="start">
+        <ion-img src="https://picsum.photos/200"></ion-img>
+      </ion-avatar>
 
-  <ion-button color="dark">
-    <ion-icon name="mail" slot="icon-only"></ion-icon>
-  </ion-button>
+      <ion-label>
+        <h2>Jon Snow</h2>
+        <h3>Never dies</h3>
+        <p>Died twice and got alive</p>
+      </ion-label>
+    </ion-item>
 
-  <ion-button color="dark" fill="outline">
-    <ion-icon name="mail" slot="icon-only"></ion-icon>
-  </ion-button>
+    <ion-item>
 
-  <ion-button color="dark" fill="clear">
-    <ion-icon name="mail" slot="icon-only"></ion-icon>
-  </ion-button>
+      <ion-thumbnail slot="start">
+        <ion-img src="https://picsum.photos/200"></ion-img>
+      </ion-thumbnail>
 
+      <ion-label>
+        <h2>Jon Snow</h2>
+        <h3>Never dies</h3>
+        <p>Died twice and got alive</p>
+      </ion-label>
+    </ion-item>
+   
 
-  <ion-button expand="block" color="warning">Click Me</ion-button>
-  <ion-button expand="full">Click Me</ion-button>
-
-  <ion-button shape="round" color="dark">Send Email</ion-button>
-  <ion-button shape="round" expand="block" color="danger">Send Email</ion-button>
-
-  <ion-button fill="solid">Download File</ion-button>
-  <ion-button fill="outline">Download File</ion-button>
-  <ion-button fill="clear">Download File</ion-button>
-
-  <ion-button size="large">Email Me</ion-button>
-  <ion-button>Email Me</ion-button>
-  <ion-button size="small">Email Me</ion-button>
-
-  <!-- Floating Action Buttons (FABs) -->
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
-    <ion-fab-button color="danger">Hi</ion-fab-button>
-  </ion-fab>
-
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="danger">
-      <ion-icon name="share"></ion-icon>
-    </ion-fab-button>
-
-    <!-- side = top | bottom | start | end -->
-    <ion-fab-list side="end">
-      <ion-fab-button color="primary">
-        <ion-icon name="logo-facebook"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="secondary">
-        <ion-icon name="logo-twitter"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="tertiary">
-        <ion-icon name="LOGO-INSTAGRAM"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-
-  </ion-fab>
+    
+  </ion-list>
 
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar></ion-toolbar>
-</ion-footer>
