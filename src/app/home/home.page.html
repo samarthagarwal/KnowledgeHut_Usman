@@ -1,8 +1,20 @@
 <ion-header>
   <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button>Menu</ion-button>
+    </ion-buttons>
+
     <ion-title>
       HelloIonic
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>Options</ion-button>
+    </ion-buttons>
+
+
+
   </ion-toolbar>
 
   <ion-toolbar color="primary">
@@ -11,7 +23,41 @@
 </ion-header>
 
 <ion-content>
+  <ion-button color="danger">Send Email</ion-button>
+  <ion-button color="warning">Send Email</ion-button>
+  <ion-button color="dark">Send Email</ion-button>
 
+  <ion-button expand="block" color="warning">Click Me</ion-button>
+  <ion-button expand="full">Click Me</ion-button>
+
+  <ion-button shape="round" color="dark">Send Email</ion-button>
+  <ion-button shape="round" expand="block" color="danger">Send Email</ion-button>
+
+  <ion-button fill="solid">Download File</ion-button>
+  <ion-button fill="outline">Download File</ion-button>
+  <ion-button fill="clear">Download File</ion-button>
+
+  <ion-button size="large">Email Me</ion-button>
+  <ion-button>Email Me</ion-button>
+  <ion-button size="small">Email Me</ion-button>
+
+  <!-- Floating Action Buttons (FABs) -->
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true">
+    <ion-fab-button color="danger">Hi</ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="danger">Share</ion-fab-button>
+
+    <!-- side = top | bottom | start | end -->
+    <ion-fab-list side="end">
+      <ion-fab-button color="primary">Facebook</ion-fab-button>
+      <ion-fab-button color="secondary">Twitter</ion-fab-button>
+      <ion-fab-button color="tertiary">Instagram</ion-fab-button>
+    </ion-fab-list>
+
+  </ion-fab>
 
 
 </ion-content>
