@@ -8,7 +8,7 @@
     </ion-buttons>
 
     <ion-title>
-      HelloIonic
+      {{ pageTitle + " - " + (2 * num1) }}
     </ion-title>
 
     <ion-buttons slot="end">
@@ -25,35 +25,7 @@
 </ion-header>
 
 <ion-content>
-  
-  <ion-grid>
 
-
-    <ion-row>
-      <ion-col offset-xs="3" size-xs="6" offset-sm="0" size-sm="6" offset-md="0" size-md="6" offset-lg="0" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
-        <img src="https://picsum.photos/500/500" alt="">
-      </ion-col>
-    </ion-row>
-
-  </ion-grid>
+  <ion-button [color]="buttonColor" (click)="changeColor()"> This is a button</ion-button>
 
 </ion-content>
