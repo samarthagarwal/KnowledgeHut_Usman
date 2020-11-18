@@ -26,6 +26,36 @@
 
 <ion-content>
 
-  <ion-button [color]="buttonColor" (click)="changeColor()"> This is a button</ion-button>
+  
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Enter Name</ion-label>
+      <ion-input [(ngModel)]="userName" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button *ngIf="isFormValid()" [color]="buttonColor"> Submit </ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let person of people">
+      <!-- <ion-avatar slot="start" *ngIf="person.isActive">
+        <img [src]="person.picture">
+      </ion-avatar>
+      <ion-avatar slot="end" *ngIf="!person.isActive">
+        <img [src]="person.picture">
+      </ion-avatar> -->
+      
+      <ion-avatar [slot]="person.isActive === true ? 'start' : 'end'">
+        <img [src]="person.picture">
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>{{ person.name }}</h2>
+        <h3>{{ person.balance }}</h3>
+        <p> {{ person.gender }} </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
