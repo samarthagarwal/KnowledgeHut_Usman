@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingController, ToastController, ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,23 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  pageTitle: string = "HelloIonic"; //String
-  num1: number = 45; //int, double, float
-  num2: number = 12; //int, double, float
-  isValid: boolean = true; // bool
-  buttonColor: string = "danger";
-  userName: string = "Samarth Agarwal";
+  name: string;
+  favoriteColor: string;
+  colors: any[] = [
+    {
+    "name": "Red", "value": "red"
+    }, 
+    
+    {
+    "name": "Green", "value": "green"
+    }, 
+    
+    {
+    "name": "Blue", "value": "blue"
+    }
+  ];
+  terms: boolean = false;
+  profession: string;
 
   people: any[] = [
     {
@@ -121,32 +133,87 @@ export class HomePage {
     }
   ];
 
-  constructor() {
+  constructor(private loadingCtrl: LoadingController, private toastCtrl: ToastController, private actionsheetCtrl: ActionSheetController) {
     
   }
 
-  ionViewWillEnter() {
-    console.log("Page is about to be loaded...");
+  async showLoading() {
+    // show loading using loading controller
+    let loading = await this.loadingCtrl.create({
+      message: "Loading, please wait...",
+      spinner: "dots"
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 4000);
   }
 
-  ionViewDidEnter() {
-    console.log("Page is loaded...");
+  onChange() {
+    console.log("You changed the value of the checkbox!");
   }
 
-  ionViewWillLeave() {
-    console.log("Page is about to be unloaded...");
+  async showToast() {
+    let toast = await this.toastCtrl.create({
+      header: "Welcome",
+      message: "HelloIonic welcomes you back!",
+      color: "success",
+      position: "top",
+      buttons: [{
+        text: "Cancel",
+        icon: "close",
+        handler: () => {
+          this.handlerFunction("cancel");
+        }
+      }, {
+        text: "Okay",
+        icon: "checkmark",
+        handler: () => {
+          this.handlerFunction("okay");
+        }
+      }]
+    });
+
+    toast.present();
+
+    // toast.dismiss();
   }
 
-  ionViewDidLeave() {
-    console.log("Page is unloaded...");
+  handlerFunction(buttonName: string) {
+    console.log("You tapped on " + buttonName);
   }
 
-  isFormValid(): boolean {
-    if(this.userName.split(" ").length > 1 && this.userName.split(" ")[0].length > 3 && this.userName.split(" ")[1].length > 3) {
-      return true;
-    } else {
-      return false;
-    }
+
+  async showActionSheet() {
+    let actionsheet = await this.actionsheetCtrl.create({
+      header: "Choose an option",
+      subHeader: "Please select one of the following values",
+      buttons: [{
+        text: "Google",
+        handler: () => {
+          this.handlerFunction("google");
+        }
+      }, {
+        text: "Yahoo",
+        handler: () => {
+          this.handlerFunction("yahoo");
+        }
+      }, {
+        text: "Microsoft",
+        handler: () => {
+          this.handlerFunction("microsoft");
+        }
+      }, {
+        text: "Facebook",
+        handler: () => {
+          this.handlerFunction("facebook");
+        }
+      }]
+    });
+
+    actionsheet.present();
   }
 
 }
