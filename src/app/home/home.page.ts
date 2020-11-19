@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, ToastController, ActionSheetController } from '@ionic/angular';
+import { LoadingController, ToastController, ActionSheetController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -133,7 +133,7 @@ export class HomePage {
     }
   ];
 
-  constructor(private loadingCtrl: LoadingController, private toastCtrl: ToastController, private actionsheetCtrl: ActionSheetController) {
+  constructor(private loadingCtrl: LoadingController, private toastCtrl: ToastController, private actionsheetCtrl: ActionSheetController, private alertCtrl: AlertController) {
     
   }
 
@@ -214,6 +214,41 @@ export class HomePage {
     });
 
     actionsheet.present();
+  }
+
+  async showAlert() {
+    let alert = await this.alertCtrl.create({
+      header: "Congratulations",
+      subHeader: "Account Activated",
+      message: "Your account has been activated successfully and you can enjoy free movies for 30 days.",
+      inputs: [{
+        name: "password",
+        type: "password",
+        label: "Password",
+        placeholder: "12345678"
+      }, {
+        name: "confirmPassword",
+        type: "password",
+        label: "Confirm Password",
+        placeholder: "12345678"
+      }],
+      buttons: [{
+        text: "Cancel",
+        role: "cancel",
+        handler: () => {
+          console.log("You tapped on cancel.")
+        }
+      }, {
+        text: "OK",
+        handler: async (data) => {
+          if(data.password != data.confirmPassword) {
+            return false;
+          }
+        }
+      }]
+    });
+
+    alert.present();
   }
 
 }
