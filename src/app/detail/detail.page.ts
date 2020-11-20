@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 // import { ActivatedRoute } from '@angular/router';
 import { RouterService } from '../router.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detail',
@@ -10,7 +11,7 @@ import { RouterService } from '../router.service';
 })
 export class DetailPage implements OnInit {
 
-  constructor(private location: Location, private routerService: RouterService) { 
+  constructor(private location: Location, private routerService: RouterService, private modalCtrl: ModalController) { 
 
     let person = this.routerService.getPerson();
     console.log(person);
@@ -22,6 +23,10 @@ export class DetailPage implements OnInit {
 
   gobackToHome() {
     this.location.back();
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 
 }

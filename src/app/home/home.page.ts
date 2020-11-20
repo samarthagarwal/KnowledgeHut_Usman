@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { DetailPage } from '../detail/detail.page';
+import { PopoverPage } from '../popover/popover.page';
 import { RouterService } from '../router.service';
 
 @Component({
@@ -116,7 +118,7 @@ export class HomePage {
     },
   ];
 
-  constructor(private router: Router, private alertController: AlertController, private routerService: RouterService) {}
+  constructor(private router: Router, private alertController: AlertController, private routerService: RouterService, private modalCtrl: ModalController, private popoverCtrl: PopoverController) {}
 
   refresh(event) {
     setTimeout(() => {
@@ -150,10 +152,20 @@ export class HomePage {
   }
 
   async gotoDetail(person) {
+    // let modal = await this.modalCtrl.create({
+    //   component: DetailPage
+    // });
 
-    // set the person
-    this.routerService.setPerson(person);
+    // modal.present();
+    this.router.navigate(["/detail"]);
+  }
 
-    this.router.navigate(['/detail'])
+  async showMenu(ev) {
+    let popover = await this.popoverCtrl.create({
+      component: PopoverPage,
+      event: ev
+    });
+
+    popover.present();
   }
 }
