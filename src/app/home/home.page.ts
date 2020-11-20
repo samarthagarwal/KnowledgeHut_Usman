@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { AlertController } from '@ionic/angular';
+import { RouterService } from '../router.service';
 
 @Component({
   selector: "app-home",
@@ -113,7 +116,7 @@ export class HomePage {
     },
   ];
 
-  constructor() {}
+  constructor(private router: Router, private alertController: AlertController, private routerService: RouterService) {}
 
   refresh(event) {
     setTimeout(() => {
@@ -144,5 +147,13 @@ export class HomePage {
 
       event.target.complete();
     }, 2000);
+  }
+
+  async gotoDetail(person) {
+
+    // set the person
+    this.routerService.setPerson(person);
+
+    this.router.navigate(['/detail'])
   }
 }
