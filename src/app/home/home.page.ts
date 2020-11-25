@@ -5,120 +5,69 @@ import { DetailPage } from '../detail/detail.page';
 import { PopoverPage } from '../popover/popover.page';
 import { RouterService } from '../router.service';
 
+import { HttpClient } from '@angular/common/http';
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",
   styleUrls: ["home.page.scss"],
 })
 export class HomePage {
-  people: any[] = [
-    {
-      index: 0,
-      isActive: true,
-      balance: "$2,882.02",
-      picture: "http://placehold.it/32x32",
-      name: "Tyler Grimes",
-      gender: "male",
-    },
-    {
-      index: 1,
-      isActive: true,
-      balance: "$3,838.62",
-      picture: "http://placehold.it/32x32",
-      name: "Nadine Wilson",
-      gender: "female",
-    },
-    {
-      index: 2,
-      isActive: false,
-      balance: "$1,318.73",
-      picture: "http://placehold.it/32x32",
-      name: "Martinez Castro",
-      gender: "male",
-    },
-    {
-      index: 3,
-      isActive: false,
-      balance: "$2,027.11",
-      picture: "http://placehold.it/32x32",
-      name: "Willis Powers",
-      gender: "male",
-    },
-    {
-      index: 4,
-      isActive: true,
-      balance: "$1,560.67",
-      picture: "http://placehold.it/32x32",
-      name: "Helen Cobb",
-      gender: "female",
-    },
-    {
-      index: 5,
-      isActive: false,
-      balance: "$1,276.12",
-      picture: "http://placehold.it/32x32",
-      name: "Angelique Ortiz",
-      gender: "female",
-    },
-    {
-      index: 6,
-      isActive: false,
-      balance: "$2,768.57",
-      picture: "http://placehold.it/32x32",
-      name: "Elizabeth Flynn",
-      gender: "female",
-    },
-    {
-      index: 7,
-      isActive: false,
-      balance: "$3,661.02",
-      picture: "http://placehold.it/32x32",
-      name: "Mattie Williams",
-      gender: "female",
-    },
-    {
-      index: 8,
-      isActive: true,
-      balance: "$3,433.50",
-      picture: "http://placehold.it/32x32",
-      name: "Kathryn Holt",
-      gender: "female",
-    },
-    {
-      index: 9,
-      isActive: true,
-      balance: "$2,022.55",
-      picture: "http://placehold.it/32x32",
-      name: "Shawna Figueroa",
-      gender: "female",
-    },
-    {
-      index: 10,
-      isActive: true,
-      balance: "$1,737.46",
-      picture: "http://placehold.it/32x32",
-      name: "Hatfield Rutledge",
-      gender: "male",
-    },
-    {
-      index: 11,
-      isActive: true,
-      balance: "$3,512.70",
-      picture: "http://placehold.it/32x32",
-      name: "Georgina Bass",
-      gender: "female",
-    },
-    {
-      index: 12,
-      isActive: false,
-      balance: "$2,207.04",
-      picture: "http://placehold.it/32x32",
-      name: "Ingrid Mcfadden",
-      gender: "female",
-    },
-  ];
+  people: any;
+  clickedPicture: string;
 
-  constructor(private router: Router, private alertController: AlertController, private routerService: RouterService, private modalCtrl: ModalController, private popoverCtrl: PopoverController) {}
+  constructor(private router: Router, private alertController: AlertController, private routerService: RouterService, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private httpClient: HttpClient, private camera: Camera, private geo: Geolocation) {
+
+    this.getData();
+    this.getLocation();
+    
+  }
+
+  async getLocation() {
+
+    console.log("Getting location, please wait...");
+    let location = await this.geo.getCurrentPosition();
+    console.log(location);
+
+  }
+
+  async launchCamera() {
+
+
+    let cameraOptions: CameraOptions = {
+      quality: 75,
+      cameraDirection: this.camera.Direction.BACK,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      targetHeight: 512,
+      targetWidth: 512,
+      saveToPhotoAlbum: true
+    };
+
+    let pictureData = await this.camera.getPicture(cameraOptions);
+    console.log(pictureData);
+
+    this.clickedPicture = 'data:image/jpeg;base64,' + pictureData;
+  }
+ 
+
+  async getData() {
+    try  {
+
+      // show loading
+      let response = await this.httpClient.get("https://www.json-generator.com/api/json/get/cgouSswUwO?indent=2").toPromise();
+      console.log(response);
+
+      this.people = response;
+      // hide loading
+    } catch(ex) {
+      // show toast for 3-5 seconds
+    }
+  }
+
 
   refresh(event) {
     setTimeout(() => {
@@ -155,9 +104,17 @@ export class HomePage {
     // let modal = await this.modalCtrl.create({
     //   component: DetailPage
     // });
-
     // modal.present();
-    this.router.navigate(["/detail"]);
+
+    this.modalCtrl.create({
+      component: DetailPage
+    }).then((modal) => {
+      modal.present();
+    })
+
+
+
+    // this.router.navigate(["/detail"]);
   }
 
   async showMenu(ev) {
